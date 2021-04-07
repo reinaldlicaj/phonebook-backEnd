@@ -6,8 +6,32 @@ var User = require('../models/user');
 
 /* GET users listing. */
 router.get('/', (req, res) => {
-  User.find({}, (err, data) => {
-    res.json(data);
+  let { page, size } = req.query;
+  if (!page) {
+    page = 1;
+  }
+  if (!size) {
+    size = 10;
+  }
+
+  const limit = parseInt(size);
+  const skip = (page - 1) * size;
+
+  User.find({}, {}, { limit: limit, skip: skip }, (err, data) => {
+    if (!err) {
+      res.send({
+        page, size, data: data
+      });
+    }
+
+    else {
+      res.status(201).json({
+        success: false,
+        message: "Users could not be fetched"
+      })
+    }
+
+
   });
 });
 
@@ -17,6 +41,12 @@ router.get('/:id', (req, res) => {
   User.findById(req.params.id, (err, data) => {
     if (!err) {
       res.json(data);
+    }
+    else {
+      res.status(201).json({
+        success: false,
+        message: "User could not be fetched"
+      })
     }
   });
 });
