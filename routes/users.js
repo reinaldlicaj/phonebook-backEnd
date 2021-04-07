@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Types.ObjectId;
 var User = require('../models/user');
 
 /* GET users listing. */
