@@ -3,7 +3,6 @@ var router = express.Router();
 require("mongoose");
 var User = require("../models/user");
 
-/* GET users listing. */
 router.get("/", (req, res) => {
     let { page, size, sort } = req.query;
     page = page || 1;

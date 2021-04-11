@@ -8,14 +8,16 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     numbers: {
-        type: [{
-            number: {
-                type: String,
+        type: [
+            {
+                number: {
+                    type: String,
+                },
+                numberType: {
+                    type: String,
+                },
             },
-            numberType: {
-                type: String,
-            },
-        }],
+        ],
     },
 });
 
